@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>シンプルな振り仮名を付けるツール</title>
+  <meta name="author" content="三日月綾香, 山澗乭"/>
+  <meta name="keywords" content="日本語, シンプルな, 振り仮名, 付ける, ツール"/>
+<script>
+function handleSubmit() {
+  var payload = document.getElementById('inputArea').value;
+  fetch('https://ayaka-apps.shn.hk/furigana/', {
+    method: 'POST',
+    body: payload
+  })
+  .then((response) => response.text())
+  .then((data) => void(document.getElementById('outputArea').innerText = data))
+  .catch((error) => console.error('Error:', error));
+}
+window.addEventListener('DOMContentLoaded', function() {
+  var _h = '&#x73;&#x68;&#x6E;&#x2E;&#x68;&#x6B;';
+  var _a = '&#x40;&#x6D;&#x61;&#x69;&#x6C;&#x2E;';
+  var _n = '&#x61;&#x79;&#x61;&#x6b;&#x61;';
+  var _e = _n + _a + _h;
+  _a = document.createElement('span');
+  _a.innerHTML = _e;
+  document.getElementById('gd').href = 'm' + 'a' + 'ilto' + ':' + _a.innerText;
+});
+</script>
+<!-- CSS rules are mainly taken from http://jgrammar.life.coocan.jp/ja/index.htm -->
+<style>
+body {
+  background-color: #e0ffe0;
+  color: black;
+  font-family: sans-serif, sans-serif;
+  line-height: 1.6;
+}
+h1 {
+  background-color: aqua;
+  color: navy;
+}
+form {
+  background-color: #e0ffff;
+  color: inherit;
+}
+h2 {
+  background-color: navy;
+  color: white;
+}
+textarea {
+  display: block;
+}
+output {
+  display: block;
+  font-size: x-large;
+}
+a:link {
+  background: inherit;
+  color: blue;
+}
+textarea {
+  width: 400px;
+  max-width: calc(100vw - 1.25em);
+}
+.wrapper {
+  background: #ffffe0;
+  border: 1px solid black;
+  color: inherit;
+}
+.wrapper2 > * {
+  padding: 0 0.5rem;
+}
+.align-right {
+  text-align: right;
+}
+</style>
+</head>
+<body>
+  <h1>シンプルな振り仮名を付けるツール</h1>
+  <p class="align-right">著作者：<a id="gd" href="mailto:account@example.org">三日月 綾香</a>　山澗 乭</p>
+  <hr/>
+  <div class="wrapper">
+    <form onsubmit="handleSubmit(); return false">
+      <textarea class="form-control" id="inputArea" rows="5">感じ取れたら手を繋ごう、重なるのは人生のライン and レミリア最高！</textarea>
+      <p><input class="btn btn-primary" type="submit" value="振り仮名を付ける"/></p>
+    </form>
+    <div class="wrapper2">
+      <h2>表示結果</h2>
+      <output id="outputArea">感（かん）じ取（と）れたら手（て）を繋（つな）ごう、重（かさ）なるのは人生（じんせい）のライン and レミリア最高（さいこう）！</output>
+      <h2>Web API 参照</h2>
+      <p>POST メソッドで <a href="https://ayaka-apps.shn.hk/furigana/">https://ayaka-apps.shn.hk/furigana/</a> に送信して、結果は<a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88">プレーンテキスト</a>として返されます。</p>
+      <p>この Web API は、<a href="https://github.com/hexenq/kuroshiro">kuroshiro</a> を利用して作成されています。詳細については、<a href="https://github.com/ayaka14732/furigana">Furigana APP</a> を参照してください。</p>
+      <p>このページのソースコードは、<a href="https://github.com/ayaka14732/simple-furigana">GitHub のページ</a>にご覧ください。</p>
+    </div>
+  </div>
+  <hr/>
+  <ul>
+    <li>2020/12/10 初版</li>
+  </ul>
+  <hr/>
+</body>
+</html>
